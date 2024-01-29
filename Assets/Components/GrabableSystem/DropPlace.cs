@@ -9,13 +9,13 @@ public class DropPlace : MonoBehaviour
     public enum CheckMode
     {
         CheckObject = 1,
-        CheckGrabableType = 2
+        CheckObjectType = 2
     }
 
     [Header("Setup")]
     [SerializeField] private List<Grabable> _validGrabables = new();
-    [SerializeField] private Grabable.GrabableType _validGrabableTypes = new();
     [SerializeField] private CheckMode _checkMode;
+    [SerializeField] private List<ObjectType> _validObjectTypes = new();
 
     [Header("Events")]
     public UnityEvent<GameObject> OnObjectDropped;
@@ -23,8 +23,6 @@ public class DropPlace : MonoBehaviour
 
     public bool isValid(Grabable grabable)
     {
-        bool isValid = true;
-
         if(_checkMode.HasFlag(CheckMode.CheckObject))
         {
             if(_validGrabables.Contains(grabable))
@@ -33,15 +31,18 @@ public class DropPlace : MonoBehaviour
             }
         }
 
-        if (_checkMode.HasFlag(CheckMode.CheckGrabableType))
+        if(_checkMode.HasFlag(CheckMode.CheckObjectType))
         {
-            if (!_validGrabableTypes.HasFlag(grabable.grabableType))
+            foreach(ObjectType objectType in grabable.objectTypes)
             {
-                isValid = false;
+                if (_validObjectTypes.Contains(objectType))
+                {
+                    return true;
+                }
             }
         }
 
-        return isValid;
+        return false;
     }
 
     public void OnDrop(Grabable grabable)

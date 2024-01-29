@@ -12,20 +12,13 @@ public class Grabable : MonoBehaviour
         FollowParentSmooth,
         SetOnParent,
         SetOnParentZeroPosition
-    }
-
-    [System.Flags]
-    public enum GrabableType
-    {
-        Weapon = 1,
-        Consumible = 2,
-        Throwable = 4
-    }
+    }    
 
     [Header("setup")]
     [SerializeField] private GrabMode _grabMode = GrabMode.FollowParentTeleport;
     [SerializeField, Min(0)] private float _smoothTime = 0.25f;
-    [SerializeField] public GrabableType grabableType = GrabableType.Throwable;
+    [SerializeField] public List<ObjectType> objectTypes = new();
+
 
     [Header("Events")]
     public UnityEvent<GameObject, GameObject> OnStartGrab;
