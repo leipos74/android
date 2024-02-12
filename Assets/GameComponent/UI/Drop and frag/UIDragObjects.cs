@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UIDragObjects : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    
 
     private RectTransform _rect;
     public Transform _targetParent;
