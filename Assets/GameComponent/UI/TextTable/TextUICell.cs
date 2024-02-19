@@ -39,6 +39,6 @@ public class TextUICell : UICell, IBeginDragHandler, IDragHandler, IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         _rect.SetParent(_targetParent);
-        label.raycastTarget = false;
+        label.raycastTarget = true;
     }
 }
